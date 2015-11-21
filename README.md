@@ -1,2 +1,2 @@
 # server
-Web UI for simple timetraker Tickmo
+Web UI for simple time tracker **Tickmo**

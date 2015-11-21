@@ -1,0 +1,4 @@
+vagrant/
+nimcache/
+.vagrant
+server
