@@ -2,3 +2,4 @@ vagrant/
 nimcache/
 .vagrant
 server
+daemon.log
