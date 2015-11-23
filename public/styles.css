@@ -1,4 +1,4 @@
-/*pafe titles*/
+/*page titles*/
 
 h1.page-header {
   text-align: center;
@@ -14,4 +14,9 @@ h1.page-header {
 .list-screens a {
   max-width: 120px;
   float: left;
+  margin-left: 13px;
+}
+
+div.row {
+  margin: 10px 55px;
 }
