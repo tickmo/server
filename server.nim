@@ -4,7 +4,7 @@ import jester, templates
 import layouts
 
 const
-  DirName: string = "savedscreens/"
+  dirName: string = "savedscreens/"
   format: string = "*.png"
 type
   stringArray = seq[string]
@@ -13,7 +13,7 @@ var
 
 existScrens = @[]
 
-for file in walkFiles(DirName & format):
+for file in walkFiles(dirName & format):
   existScrens.add(file)
 
 proc setImages(request: Request): string =
@@ -21,12 +21,12 @@ proc setImages(request: Request): string =
   let fileName = screenshots.fields["filename"]
 
   try:
-    writeFile(DirName & fileName, screenshots.body)
+    writeFile(dirName & fileName, screenshots.body)
   except IOError:
     let msg = getCurrentExceptionMsg()
-    echo "Screenshot $currentScreen not written to $folder " & msg
+    echo "\r\n" & msg & "\r\n"
 
-  existScrens.add(DirName & fileName)
+  existScrens.add(dirName & fileName)
   return ""
 
 routes:
