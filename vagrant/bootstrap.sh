@@ -6,10 +6,10 @@ if ! [ -L /var/www ]; then
   rm -rf /var/www
   ln -fs /vagrant /var/www
 fi
-cp /vagrant/vagrant/nginx.conf /etc/nginx/sites-enabled/tyrion
+cp /vagrant/vagrant/nginx.conf /etc/nginx/sites-enabled/tickmo-web
 
 apt-get install -y supervisor
-cp /vagrant/vagrant/supervisor.conf /etc/supervisor/conf.d/tyrion.conf
+cp /vagrant/vagrant/supervisor.conf /etc/supervisor/conf.d/tickmo-web.conf
 
 cd /usr/local/share
 git clone -b master git://github.com/nim-lang/Nim.git nim
