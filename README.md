@@ -1,2 +1,4 @@
-# server
-Web UI for simple time tracker **Tickmo**
+# Tickmo Web Application
+
+
+Application which provides web storage, interface for **Tickmo**.
