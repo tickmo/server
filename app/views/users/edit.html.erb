@@ -1,6 +1,28 @@
-<h1>Editing User</h1>
+<%= provide(:title, "Edit Profile") %>
+<h1>Edit your profile</h1>
 
-<%= render 'new_user_form', object: @user %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= render 'error_form', object: @user %>
+    <div class="form-body">
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+    <%= form_for(@user) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirm Password" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit class: "btn btn-block", value: "Update Profile!" %>
+
+    <% end %>
+    </div>
+  </div>
+</div>

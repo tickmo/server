@@ -1,5 +1,31 @@
-<h1>New User</h1>
+<%= provide(:title, "Sign Up") %>
+<h1>Create Profile</h1>
 
-<%= render 'new_user_form', object: @user %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= render 'error_form', object: @user %>
+    <div class="form-body">
 
-<%= link_to 'Back', users_path %>
+    <%= form_for(@user) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Password Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit class: "btn btn-block", value: "Create Profile!" %>
+
+      <p>Already have account? <%= link_to "Sign In!", signin_path %></p>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+

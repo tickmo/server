@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  before_action :signed_in_user,  only: [:index, :edit, :update, :destroy, :index]
+  before_action :correct_user,    only: [:edit, :update]
+  before_action :admin_user,      only: :destroy
+  before_action :registered_user, only: [:new, :create]
+
   # GET /users
   # GET /users.json
   def index
@@ -28,6 +33,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        sign_in @user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -42,7 +48,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html do
+          flash[:success] = "Profile was successfully updated"
+          redirect_to @user
+        end
+
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -70,5 +80,25 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  # Before filter.
+
+  def correct_user
+    redirect_to root_path unless current_user?(@user)
+  end
+
+  def admin_user
+    redirect_to root_path unless current_user.admin?
+  end
+
+  def registered_user
+    redirect_to root_path, notice: "You already have account." unless current_user?(@user)
+  end
+
+  def signed_in_user
+    unless signed_in?
+      redirect_to signin_path, notice: "Please, sign in."
+    end
   end
 end
