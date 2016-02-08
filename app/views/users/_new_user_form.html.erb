@@ -1,0 +1,19 @@
+<%= render 'error_form', object: object %>
+
+<%= form_for(object) do |f| %>
+  <%= f.label "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label "Email" %>
+  <%= f.text_field :email %>
+
+  <%= f.label "Password" %>
+  <%= f.password_field :password %>
+
+  <%= f.label "Password Confirmation" %>
+  <%= f.password_field :password_confirmation %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
