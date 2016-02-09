@@ -1,22 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%= provide(:title, "All Users") %>
 
-<h1>Listing Users</h1>
+<h1>All Users</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @users.each do |user| %>
+  <ul>
+    <li>
+      <%= user.name %>
+      <%= link_to 'Show', user %>
+      <%= link_to 'Edit', edit_user_path(user) %>
+      <%= (link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }) if current_user.admin? %>
+    </li>
+  </ul>
+<% end %>
