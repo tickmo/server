@@ -15,6 +15,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
+  it { should respond_to(:api_authentication_token) }
 
   it { should be_valid }
 
@@ -25,6 +26,11 @@ describe User do
     end
 
     it { should be_admin }
+  end
+
+  describe "with API authentication token" do
+
+    it { @user.api_authentication_token != nil}
   end
 
   describe "when name is not present" do

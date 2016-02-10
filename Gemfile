@@ -6,7 +6,12 @@ gem 'bcrypt'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '2.3.2.0'
+gem 'faker'
 
+# for API's needs.
+gem 'pundit', '~> 0.3.0'
+gem 'active_hash_relation'
+gem 'active_model_serializers', '0.9.2'
 
 gem 'jquery-rails'
 gem 'turbolinks'
