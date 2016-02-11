@@ -8,9 +8,7 @@ describe Api::V1::UsersController, type: :request do
     describe "not authorized" do
       before { get api_v1_users_path }
 
-      it "returns the correct status" do
-        expect(response.status).to eql(401)
-      end
+      it_return_correct_status(401)
     end
 
     describe "authorized" do
@@ -19,9 +17,7 @@ describe Api::V1::UsersController, type: :request do
         sign_and_request(api_v1_users_path)
       end
 
-      it "returns the correct status" do
-        expect(response.status).to eql(200)
-      end
+      it_return_correct_status(200)
 
       it 'returns the data in the body' do
         body = HashWithIndifferentAccess.new(MultiJson.load(response.body))
@@ -52,9 +48,7 @@ describe Api::V1::UsersController, type: :request do
       expect(User.find_by(email: data['user']['email'])) != nil
     end
 
-    it "returns the correct status" do
-      expect(response.status).to eql(201)
-    end
+    it_return_correct_status(201)
   end
 
   context :show do
@@ -63,9 +57,7 @@ describe Api::V1::UsersController, type: :request do
       let(:uid) { 1 }
       before { get api_v1_user_path(uid) }
 
-      it "returns the correct status" do
-        expect(response.status).to eql(401)
-      end
+      it_return_correct_status(401)
     end
 
     describe "authorized" do
@@ -73,9 +65,7 @@ describe Api::V1::UsersController, type: :request do
         auth_request(api_v1_user_path(auth_user.id))
       end
 
-      it "returns the correct status" do
-        expect(response.status).to eql(200)
-      end
+      it_return_correct_status(200)
 
       it "returns the data in the body" do
         body = HashWithIndifferentAccess.new(MultiJson.load(response.body))
@@ -86,6 +76,55 @@ describe Api::V1::UsersController, type: :request do
   end
 
   context :update do
+    let(:new_data) do
+      ActionController::Parameters.new("user" => {
+        "email"    => "updated@post.dom",
+        "name"     => "MD Newest Name",
+        "password" => "password",
+        "password_confirmation" => "password"
+        })
+    end
+
+    describe 'not authorized' do
+      let(:uid) { 1 }
+      before do
+        patch api_v1_user_path(uid), new_data
+      end
+
+      it_return_correct_status(401)
+    end
+
+    describe "authorized" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { patch api_v1_user_path(user.id), new_data, auth_header(user) }
+
+      it_return_correct_status(200)
+
+      it "successful" do
+        expect(User.find(user.id).name).to  eql(new_data[:user][:name])
+        expect(User.find(user.id).email).to eql(new_data[:user][:email])
+      end
+
+      it "response has header 'Location'" do
+        expect(response.headers.key? 'Location')
+        expect(response.headers['Location']).to eql(api_v1_user_path(user.id))
+      end
+
+      describe "with wrong credentials" do
+        let(:wrong_user) { FactoryGirl.create(:user) }
+        let(:wrong_data) do
+          ActionController::Parameters.new("user" => {
+            "email"    => "wrong @ post.dom;",
+            "name"     => "MD Newest Name",
+            "password" => "password",
+            "password_confirmation" => "wrong_password"
+            })
+        end
+        before { patch api_v1_user_path(wrong_user.id), wrong_data, auth_header(wrong_user) }
+
+        it_return_correct_status(422)
+      end
+    end
   end
 
   context :delete do
@@ -94,9 +133,7 @@ describe Api::V1::UsersController, type: :request do
       let(:uid) { 1 }
       before { delete api_v1_user_path(uid) }
 
-      it "returns the correct status" do
-        expect(response.status).to eql(401)
-      end
+      it_return_correct_status(401)
     end
 
     context "when the resource does NOT exist" do
@@ -104,9 +141,7 @@ describe Api::V1::UsersController, type: :request do
         auth_request(api_v1_user_path(auth_user.id + 100), type: 'delete')
       end
 
-      it "returns the correct status" do
-        expect(response.status).to eql(404)
-      end
+      it_return_correct_status(404)
     end
 
     context "when the resource does exist" do
@@ -114,9 +149,7 @@ describe Api::V1::UsersController, type: :request do
         auth_request(api_v1_user_path(auth_user.id), type: 'delete')
       end
 
-      it "returns the correct status" do
-        expect(response.status).to eql(204)
-      end
+      it_return_correct_status(204)
 
       it "actually deletes the resource" do
         expect(User.find_by(id: auth_user.id)).to eql(nil)

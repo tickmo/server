@@ -26,6 +26,12 @@ module AuthenticationHelper
   alias_method :sign_and_request, :auth_request
 end
 
+  def it_return_correct_status(status)
+    it "returns the correct status" do
+      expect(response.status).to eql(status)
+    end
+  end
+
 RSpec.configure do |config|
   config.include AuthenticationHelper, :type => :request
 end
