@@ -1,0 +1,17 @@
+version: '2'
+services:
+  server:
+    build: .
+    image: rails
+    container_name: server 
+    ports:
+      - "80:3000"
+    depends_on:
+      - dbstore
+    volumes_from:
+      - dbstore
+  dbstore:
+    container_name: dbstore 
+    image: busybox
+    volumes:
+      - ./db:/code/db
