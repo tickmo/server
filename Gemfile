@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 gem 'sass-rails', '~> 5.0'
 gem 'bcrypt'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'faker'
 
@@ -24,15 +22,9 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
-group :development do
-  gem 'web-console'
-  gem 'spring'
-end
-
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
-  gem 'libnotify'
   gem 'factory_girl_rails'
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
 end
