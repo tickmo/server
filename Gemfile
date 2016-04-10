@@ -20,6 +20,7 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'rubocop'
 end
 
 group :test do
@@ -28,4 +29,3 @@ group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
 end
-

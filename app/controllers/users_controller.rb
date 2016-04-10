@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:success] = "Profile was successfully updated"
+      flash[:success] = 'Profile was successfully updated'
       redirect_to @user
     else
       render :edit
@@ -40,16 +40,17 @@ class UsersController < ApplicationController
 
   def destroy
     if @user.admin?
-      redirect_to users_path, notice: "Can't delete admin account."
+      redirect_to users_path, notice: "Can\'t delete admin account."
     else
       @user.destroy
-      flash[:success] = "User profile deleted"
+      flash[:success] = 'User profile deleted'
       redirect_to users_path
     end
   end
 
   private
-######################################################################################################################
+
+  ####################################################################################################################
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
@@ -70,12 +71,10 @@ class UsersController < ApplicationController
   end
 
   def registered_user
-    redirect_to root_path, notice: "You already have account." unless current_user?(@user)
+    redirect_to root_path, notice: 'You already have account.' unless current_user?(@user)
   end
 
   def signed_in_user
-    unless signed_in?
-      redirect_to signin_path, notice: "Please, sign in."
-    end
+    redirect_to signin_path, notice: 'Please, sign in.' unless signed_in?
   end
 end

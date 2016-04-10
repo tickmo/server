@@ -8,10 +8,11 @@ class Api::V1::BaseController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :unauthorized!
 
   protected
-#######################################################################################################################
+
+  #####################################################################################################################
 
   def unauthenticated!
-    response.headers['WWW-Authenticate'] = "Token realm=Application"
+    response.headers['WWW-Authenticate'] = 'Token realm=Application'
     render json: { error: 'Bad credentials' }, status: 401
   end
 
@@ -23,19 +24,19 @@ class Api::V1::BaseController < ApplicationController
     render json: { error: 'not authorized' }, status: 401
   end
 
-  def invalid_resource!(errors = [])
+  def invalid_resource!(errors=[])
     api_error(status: 422, errors: errors)
   end
 
   def not_found
-    return api_error(status: 404, errors: 'Not found')
+    api_error(status: 404, errors: 'Not found')
   end
 
   def api_error(status: 500, errors: [])
     unless Rails.env.production?
-      puts errors.full_messages if errors.respond_to? :full_messages
+      errors.full_messages if errors.respond_to? :full_messages
     end
-    head status: status and return if errors.empty?
+    return head status: status if errors.empty?
 
     render json: jsonapi_format(errors).to_json, status: status
   end
@@ -43,7 +44,7 @@ class Api::V1::BaseController < ApplicationController
   def authenticate_user!
     token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
 
-    user_email = options.blank?? nil : options[:email]
+    user_email = options.blank? ? nil : options[:email]
     user = user_email && User.find_by(email: user_email)
 
     if user && ActiveSupport::SecurityUtils.secure_compare(user.api_authentication_token, token)
@@ -54,7 +55,8 @@ class Api::V1::BaseController < ApplicationController
   end
 
   private
-#######################################################################################################################
+
+  #####################################################################################################################
 
   def jsonapi_format(errors)
     return errors if errors.is_a? String
@@ -62,11 +64,11 @@ class Api::V1::BaseController < ApplicationController
     errors.messages.each do |attribute, error|
       array_hash = []
       error.each do |e|
-        array_hash << {attribute: attribute, message: e}
+        array_hash << { attribute: attribute, message: e }
       end
-      errors_hash.merge!({ attribute => array_hash })
+      errors_hash.merge!(attribute => array_hash)
     end
 
-    return errors_hash
+    errors_hash
   end
 end

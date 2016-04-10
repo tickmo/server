@@ -1,10 +1,10 @@
 class UserPolicy < ApplicationPolicy
   def show?
-    return true
+    true
   end
 
   def create?
-    return true
+    true
   end
 
   def update?

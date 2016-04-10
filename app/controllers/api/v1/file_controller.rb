@@ -1,27 +1,26 @@
 class Api::V1::FileController < Api::V1::BaseController
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
   before_action :exist_dir, only: :create
 
   UTF8_ENCODING = Encoding::UTF_8
-  DATA_DIR = Rails.root.join('public','data')
+  DATA_DIR = Rails.root.join('public', 'data')
 
   def create
     params[:screenshots].each do |screen|
       data = screen.read
-      if data.empty?
-        return api_error(status: 422, errors: 'bad data.')
-      else
-        path = Rails.root.join(DATA_DIR, screen.original_filename)
-        save_file(path, data)
 
-        return api_error(status: 422, errors: 'file not saved.') unless File.exist?(path)
-        render json: { success: 'data saved' }, status: 200
-      end
+      return api_error(status: 422, errors: 'bad data.') if data.empty?
+      path = Rails.root.join(DATA_DIR, screen.original_filename)
+      save_file(path, data)
+
+      return api_error(status: 422, errors: 'file not saved.') unless File.exist?(path)
+      render json: { success: 'data saved' }, status: 200
     end
   end
 
   private
-#######################################################################################################################
+
+  #####################################################################################################################
 
   def save_file(path, data)
     File.open(path, 'wb') do |file|
