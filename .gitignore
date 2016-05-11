@@ -15,3 +15,4 @@
 
 # Ignore vagrant local files.
 /.vagrant
+/coverage

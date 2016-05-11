@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', require: false
+gem 'uglifier'
 
 group :development, :test do
   gem 'byebug'
@@ -28,4 +29,11 @@ group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
+  gem 'coveralls', require: false
 end
+
+group :production do
+  gem 'unicorn'
+  gem 'pg'
+end
+

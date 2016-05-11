@@ -14,8 +14,8 @@ class Api::V1::FileController < Api::V1::BaseController
       save_file(path, data)
 
       return api_error(status: 422, errors: 'file not saved.') unless File.exist?(path)
-      render json: { success: 'data saved' }, status: 200
     end
+    render json: { success: 'data saved' }, status: 200
   end
 
   private

@@ -1,0 +1,18 @@
+language: ruby
+rvm:
+- 2.2.3
+
+before_script:
+  - sudo apt-get install software-properties-common
+  - sudo apt-add-repository ppa:ansible/ansible -y && sudo apt-get update && sudo apt-get install ansible
+script:
+  - bundle exec rake db:migrate RAILS_ENV=test
+  - bundle exec rspec
+bundler_args: "--without play"
+notifications:
+  email:
+    recipients:
+      - antnruban@gmail.com
+      - sanya.davyskiba@gmail.com
+    on_success: never
+    on_failure: always
