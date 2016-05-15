@@ -1,0 +1,20 @@
+# SQLite version 3.x
+#
+default: &default
+  adapter: postgresql
+  host: host
+  username: db_user
+  password: "db_pass"
+  encoding: utf8
+
+development:
+  <<: *default
+  database: name_dev
+
+test:
+  <<: *default
+  database: name_test
+
+production:
+  <<: *default
+  database: name_prod
