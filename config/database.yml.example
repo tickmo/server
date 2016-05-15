@@ -18,3 +18,14 @@ test:
 production:
   <<: *default
   database: name_prod
+
+# There are Travis CI configurations below.
+#
+travis: &travis
+  adapter: postgresql
+  database: travis_ci_test
+  username: travis
+  encoding: utf8
+
+test:
+  <<: *travis

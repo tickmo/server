@@ -3,9 +3,9 @@ rvm:
 - 2.2.3
 
 before_script:
-  - sudo apt-get install software-properties-common
-  - sudo apt-add-repository ppa:ansible/ansible -y && sudo apt-get update && sudo apt-get install -y ansible
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
+  - cp config/database.yml.example config/database.yml
   - bundle exec rake db:migrate RAILS_ENV=test
   - bundle exec rspec
 bundler_args: "--without play"
@@ -16,6 +16,3 @@ notifications:
       - sanya.davyskiba@gmail.com
     on_success: never
     on_failure: always
-after_success:
-  - git clone https://github.com/tickmo/ansible_deploy.git $HOME/ansible_deploy
-  - cd $HOME/ansible_deploy && ansible-playbook plays/deploy.yml
