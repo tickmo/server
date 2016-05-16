@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'Authentication' do
   subject { page }
 
+  let(:user) { FactoryGirl.create(:user) }
+
   describe 'signin page' do
     before { visit signin_path }
 
@@ -19,7 +21,6 @@ describe 'Authentication' do
     end
 
     describe 'with valid information' do
-      let(:user) { FactoryGirl.create(:user) }
       before { sign_in user }
 
       it { should have_title(user.name) }
@@ -37,7 +38,6 @@ describe 'Authentication' do
   end
 
   describe 'edit' do
-    let(:user) { FactoryGirl.create(:user) }
     before do
       sign_in user
       visit edit_user_path(user)
@@ -73,10 +73,65 @@ describe 'Authentication' do
     end
   end
 
+  describe 'delete' do
+    let(:admin) { FactoryGirl.create(:admin) }
+    let!(:delete_user) { FactoryGirl.create(:user) }
+    before do
+      sign_in admin
+      visit users_path
+    end
+
+    it { should have_link('Destroy', href: user_path(delete_user)) }
+    it 'changes users count' do
+      expect { click_link('Destroy', match: :first) }.to change(User, :count).by(-1)
+    end
+  end
+
+  describe 'signup' do
+    before { visit signup_path }
+    let(:submit) { 'Create Profile!' }
+
+    it { should have_title(full_title('Sign Up')) }
+    it { should have_selector('h1', text: 'Create Profile') }
+
+    describe 'with invalid information' do
+      it 'should not create a user' do
+        expect { click_button submit }.not_to change(User, :count)
+      end
+
+      describe 'after submission' do
+        before { click_button submit }
+
+        it { should have_content('error') }
+        it { should have_title('Sign Up') }
+      end
+    end
+
+    describe 'with valid information' do
+      before do
+        fill_in 'Name',             with: 'Example User'
+        fill_in 'Email',            with: 'user@example.com'
+        fill_in 'Password',         with: 'foobar'
+        fill_in 'Password Confirmation', with: 'foobar'
+      end
+
+      it 'should create a user' do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
+
+      describe 'after saving the user' do
+        before { click_button submit }
+        let(:user) { User.find_by(email: 'user@example.com') }
+        let(:flash_message) { 'User was successfully created.' }
+
+        it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-notice', text: flash_message) }
+      end
+    end
+  end
+
   describe 'authorization' do
     describe 'for non-signed-in users' do
-      let(:user) { FactoryGirl.create(:user) }
-
       it { should_not have_link(full_title('Users')) }
       it { should_not have_link(full_title('Sign Out')) }
 
@@ -101,7 +156,6 @@ describe 'Authentication' do
     end
 
     describe 'as wrong user', type: :request do
-      let(:user) { FactoryGirl.create(:user) }
       let(:wrong_user) { FactoryGirl.create(:user, email: 'wrong@post.dom') }
       before { sign_in user, no_capybara: true }
 
@@ -118,8 +172,6 @@ describe 'Authentication' do
     end
 
     describe 'as non-admin user' do
-      let(:user) { FactoryGirl.create(:user) }
-
       before { sign_in user, no_capybara: true }
 
       describe 'submitting a DELETE request to the Users#destroy action', type: :request do
@@ -129,8 +181,6 @@ describe 'Authentication' do
     end
 
     describe 'user already has account' do
-      let(:user) { FactoryGirl.create(:user) }
-
       before do
         sign_in user
         visit signup_path
