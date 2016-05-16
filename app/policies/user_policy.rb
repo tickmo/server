@@ -8,13 +8,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    return true if user.admin?
-    return true if record.id == user.id
+    return true if user
   end
 
   def destroy?
-    return true if user.admin?
-    return true if record.id == user.id
+    return true if user
   end
 
   class Scope < ApplicationPolicy::Scope
