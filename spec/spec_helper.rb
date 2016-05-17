@@ -14,6 +14,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
+  config.include AuthenticationHelper, type: :request
   config.include Rails.application.routes.url_helpers
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
@@ -30,5 +31,20 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+end
+
+# Policies testing needs.
+RSpec::Matchers.define :permit do |action|
+  match do |policy|
+    policy.public_send("#{action}?")
+  end
+
+  failure_message do |policy|
+    "#{policy.class} does not permit #{action} for #{policy.user.inspect}."
+  end
+
+  failure_message_when_negated do |policy|
+    "#{policy.class} does not forbid #{action} for #{policy.user.inspect}."
   end
 end

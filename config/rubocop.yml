@@ -133,3 +133,8 @@ Lint/Debugger:
 # Style preference
 Style/MethodDefParentheses:
   Enabled: false
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*

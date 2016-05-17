@@ -30,7 +30,3 @@ def it_return_correct_status(status)
     expect(response.status).to eql(status)
   end
 end
-
-RSpec.configure do |config|
-  config.include AuthenticationHelper, type: :request
-end
