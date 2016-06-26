@@ -15,6 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
+.ruby-version
 
 # Ignore vagrant local files.
 /.vagrant
