@@ -2,10 +2,11 @@ class Api::V1::BaseController < ApplicationController
   include Pundit
   include ActiveHashRelation
 
+  before_action :authenticate_user!
   protect_from_forgery with: :null_session
   before_action :destroy_session
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  rescue_from Pundit::NotAuthorizedError, with: :unauthorized!
+  rescue_from Pundit::NotAuthorizedError, with: :unauthorized
 
   protected
 
@@ -20,7 +21,7 @@ class Api::V1::BaseController < ApplicationController
     request.session_options[:skip] = true
   end
 
-  def unauthorized!
+  def unauthorized
     render json: { error: 'not authorized' }, status: 401
   end
 

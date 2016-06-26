@@ -1,4 +1,6 @@
 class Api::V1::SessionsController < Api::V1::BaseController
+  skip_before_action :authenticate_user!, only: :create
+
   def create
     user = User.find_by(email: create_params[:email])
     return api_error(status: 401) if user.nil?

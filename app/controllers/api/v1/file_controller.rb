@@ -10,10 +10,12 @@ class Api::V1::FileController < Api::V1::BaseController
       data = screen.read
 
       return api_error(status: 422, errors: 'bad data.') if data.empty?
-      path = Rails.root.join(DATA_DIR, screen.original_filename)
+      filename = screen.original_filename
+      path = Rails.root.join(DATA_DIR, filename)
       save_file(path, data)
 
       return api_error(status: 422, errors: 'file not saved.') unless File.exist?(path)
+      Rails.logger.info "File #{filename} was saved."
     end
     render json: { success: 'data saved' }, status: 200
   end
