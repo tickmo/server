@@ -45,7 +45,7 @@ class Api::V1::BaseController < ApplicationController
   def authenticate_user!
     token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
 
-    user_email = options.blank? ? nil : options[:email]
+    user_email = options.blank? ? nil : options[:user_email]
     user = user_email && User.find_by(email: user_email)
 
     if user && ActiveSupport::SecurityUtils.secure_compare(user.api_authentication_token, token)
