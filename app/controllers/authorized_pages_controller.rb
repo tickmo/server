@@ -1,5 +1,5 @@
 class AuthorizedPagesController < ApplicationController
-  before_action :set_user, :signed_in_user, :correct_user, :admin_user, :registered_user
+  before_action :set_user, :signed_in_user, :correct_user
 
   protected
 
