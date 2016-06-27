@@ -1,5 +1,8 @@
 @import "bootstrap";
 
+$grayLighter: #eee;
+$contentMaxWidth: 1200px;
+
 // Miscellaneous.
 
 html {
@@ -72,10 +75,14 @@ p {
   }
 }
 
+.container {
+  max-width: $contentMaxWidth;
+}
+
 // Footer.
 
 footer {
-  max-width: 940px;
+  max-width: $contentMaxWidth;
   margin-top: 45px;
   margin-left: auto;
   margin-right: auto;
@@ -115,7 +122,6 @@ footer {
   @include box_sizing;
 }
 
-
 // flash-messages.
 
 .alert {
@@ -138,13 +144,9 @@ input, textarea, select, .uneditable-input {
     margin: 0 0 18px 0;
   }
 }
-
-.offset3 {
-  margin-left: 315px;
-}
-
-.span6 {
-  width: 350px;
+.form-content {
+  margin: auto;
+  max-width: 350px;
 }
 
 .form-body {
@@ -157,5 +159,16 @@ input, textarea, select, .uneditable-input {
   }
   input {
     height: 33px;
+  }
+}
+
+// Screenshots
+
+// Galery
+
+a.thumbnail {
+  .img-screen {
+    height: 150px;
+    width: 400px;
   }
 }

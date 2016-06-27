@@ -48,9 +48,12 @@ GEM
     addressable (2.4.0)
     arel (6.0.3)
     ast (2.3.0)
+    autoprefixer-rails (6.3.6)
+      execjs
     bcrypt (3.1.11)
-    bootstrap-sass (2.3.2.0)
-      sass (~> 3.2)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     capybara (2.7.1)
       addressable
@@ -235,7 +238,7 @@ DEPENDENCIES
   active_hash_relation
   active_model_serializers (= 0.9.2)
   bcrypt
-  bootstrap-sass (= 2.3.2.0)
+  bootstrap-sass (= 3.3.6)
   capybara
   carrierwave (= 0.11.2)
   coveralls
@@ -251,7 +254,7 @@ DEPENDENCIES
   rmagick
   rspec-rails
   rubocop
-  sass-rails (~> 5.0)
+  sass-rails
   sdoc
   turbolinks
   uglifier

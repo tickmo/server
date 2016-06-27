@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 gem 'rails', '4.2.5'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 gem 'bcrypt'
-gem 'bootstrap-sass', '2.3.2.0'
+gem 'bootstrap-sass', '3.3.6'
 
 # for API's needs.
 gem 'pundit', '~> 0.3.0'
@@ -17,8 +17,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'uglifier'
 
 # File uploading.
-gem "rmagick"
-gem "carrierwave", '0.11.2'
+gem 'rmagick'
+gem 'carrierwave', '0.11.2'
 
 group :development, :test, :production do
   gem 'pg'

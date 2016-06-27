@@ -1,6 +1,6 @@
 module AuthenticationHelper
   def auth_header(user)
-    { 'Authorization' => "Token token=\"#{user.api_authentication_token}\", email=\"#{user.email}\"" }
+    { 'Authorization' => "Token token=\"#{user.api_authentication_token}\", user_email=\"#{user.email}\"" }
   end
 
   def request_with_header(path, header, options={ type: 'get' })

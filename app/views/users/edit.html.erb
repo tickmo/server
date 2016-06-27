@@ -1,8 +1,7 @@
-<%= provide(:title, "Edit Profile") %>
-<h1>Edit your profile</h1>
+<%= render 'layouts/title_with_header', title: 'Edit Profile', header: 'Edit your profile' %>
 
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6 offset3 form-content">
     <%= render 'error_form', object: @user %>
     <div class="form-body">
 
@@ -20,7 +19,7 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit class: "btn btn-block", value: "Update Profile!" %>
+      <%= f.submit class: "btn btn-block btn-info", value: "Update Profile!" %>
 
     <% end %>
     </div>
