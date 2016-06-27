@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @screenshots = @user.screenshots
   end
 
   def new

@@ -1,21 +1,10 @@
 class Api::V1::FileController < Api::V1::BaseController
   skip_before_action :verify_authenticity_token
-  before_action :exist_dir, only: :create
-
-  UTF8_ENCODING = Encoding::UTF_8
-  DATA_DIR = Rails.root.join('public', 'data')
+  before_action :empty_params, only: :create
 
   def create
     params[:screenshots].each do |screen|
-      data = screen.read
-
-      return api_error(status: 422, errors: 'bad data.') if data.empty?
-      filename = screen.original_filename
-      path = Rails.root.join(DATA_DIR, filename)
-      save_file(path, data)
-
-      return api_error(status: 422, errors: 'file not saved.') unless File.exist?(path)
-      Rails.logger.info "File #{filename} was saved."
+      Screenshot.create(user_id: current_user.id, screenshot_image: screen)
     end
     render json: { success: 'data saved' }, status: 200
   end
@@ -24,14 +13,9 @@ class Api::V1::FileController < Api::V1::BaseController
 
   #####################################################################################################################
 
-  def save_file(path, data)
-    File.open(path, 'wb') do |file|
-      data.force_encoding(UTF8_ENCODING) if data.encoding != UTF8_ENCODING
-      file.write(data)
+  def empty_params
+    params[:screenshots].each do |screen|
+      return api_error(status: 422, errors: 'bad data.') if screen.read.empty?
     end
-  end
-
-  def exist_dir
-    Dir.mkdir(DATA_DIR) unless Dir.exist?(DATA_DIR)
   end
 end
