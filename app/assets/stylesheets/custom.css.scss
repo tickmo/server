@@ -144,13 +144,9 @@ input, textarea, select, .uneditable-input {
     margin: 0 0 18px 0;
   }
 }
-
-.offset3 {
-  margin-left: 315px;
-}
-
-.span6 {
-  width: 350px;
+.form-content {
+  margin: auto;
+  max-width: 350px;
 }
 
 .form-body {

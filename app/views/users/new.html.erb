@@ -2,7 +2,7 @@
 <h1>Create Profile</h1>
 
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6 offset3 form-content">
     <%= render 'error_form', object: @user %>
     <div class="form-body">
 
@@ -20,12 +20,10 @@
       <%= f.label :password_confirmation, "Password Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit class: "btn btn-block", value: "Create Profile!" %>
+      <%= f.submit class: "btn btn-block btn-info", value: "Create Profile!" %>
 
       <p>Already have account? <%= link_to "Sign In!", signin_path %></p>
     <% end %>
     </div>
   </div>
 </div>
-
-

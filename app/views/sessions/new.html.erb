@@ -2,7 +2,7 @@
 <h1>Welcome Back!</h1>
 
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6 offset3 form-content">
     <div class="form-body">
       <%= form_for(:session, url: sessions_path ) do |f| %>
 
@@ -12,7 +12,7 @@
         <%= f.label :password %>
         <%= f.text_field :password, type: "password" %>
 
-        <%= f.submit "Sign In", class: "btn btn-block" %>
+        <%= f.submit "Sign In", class: "btn btn-block btn-info" %>
       <% end %>
 
       <p>New user? <%= link_to "Sign up now!", signup_path %></p>
