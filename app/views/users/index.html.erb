@@ -1,6 +1,4 @@
-<%= provide(:title, "All Users") %>
-
-<h1>All Users</h1>
+<%= render 'layouts/title_with_header', title: 'All Users', header: 'All Users' %>
 
 <% @users.each do |user| %>
   <ul>

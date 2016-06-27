@@ -17,8 +17,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'uglifier'
 
 # File uploading.
-gem "rmagick"
-gem "carrierwave", '0.11.2'
+gem 'rmagick'
+gem 'carrierwave', '0.11.2'
 
 group :development, :test, :production do
   gem 'pg'

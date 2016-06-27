@@ -2,4 +2,4 @@
 
 Rails.application.config.assets.version = '1.0'
 # Application favicon.
-Rails.application.config.assets.precompile += %w( tickmo.png )
+Rails.application.config.assets.precompile += %w(tickmo.png)

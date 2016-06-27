@@ -1,15 +1,8 @@
-<%= provide(:title, @user.name) %>
-<h1><%= @user.name %></h1>
+<%= render 'layouts/title_with_header', title: @user.name, header: @user.name %>
 
 <div class="row">
-  <div class="col-xs-6 col-md-3">
-    <% @screenshots.each do |screen| %>
-    <a href="<%= screen.screenshot_image.url %>" class="thumbnail" style="width: 200px;">
-      <%= image_tag(screen.screenshot_image.url) %>
-    </a>
-    <% end %>
+  <div class="span4 center">
+    <%= link_to 'Edit Profile', edit_user_path(@user) %> |
+    <%= link_to 'My Gallery', user_galleries_path(@user) %>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
