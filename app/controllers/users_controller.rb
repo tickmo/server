@@ -2,8 +2,8 @@ class UsersController < AuthorizedPagesController
   skip_before_action :set_user, only: [:index, :new, :create]
   skip_before_action :signed_in_user, only: [:create, :new]
   skip_before_action :correct_user, except: [:edit, :update, :show]
-  skip_before_action :admin_user, except: :destroy
-  skip_before_action :registered_user, except: [:new, :create]
+  before_action :registered_user, only: [:new, :create]
+  before_action :admin_user, only: :destroy
 
   def index
     @users = User.all
