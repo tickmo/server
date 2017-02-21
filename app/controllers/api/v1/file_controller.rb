@@ -4,6 +4,8 @@ class Api::V1::FileController < Api::V1::BaseController
 
   def create
     params[:screenshots].each do |screen|
+      return api_error(status: 422, errors: 'bad data.') if screen.read.empty?
+
       Screenshot.create(user_id: current_user.id, screenshot_image: screen)
     end
     render json: { success: 'data saved' }, status: 200
@@ -14,8 +16,6 @@ class Api::V1::FileController < Api::V1::BaseController
   #####################################################################################################################
 
   def empty_params
-    params[:screenshots].each do |screen|
-      return api_error(status: 422, errors: 'bad data.') if screen.read.empty?
-    end
+    return api_error(status: 422, errors: 'bad data.') unless params[:screenshots]
   end
 end

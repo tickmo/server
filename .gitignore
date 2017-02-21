@@ -18,3 +18,4 @@
 .ruby-version
 /coverage
 uploads
+public/shared
