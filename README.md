@@ -1,7 +1,42 @@
-# Tickmo Web Application
+# Withoutrails
 
+[![Build Status](https://travis-ci.org/antnruban/withoutrails.svg?branch=master)](https://travis-ci.org/antnruban/withoutrails)
 
-Application which provides web storage, interface for **Tickmo**.
+#### Description:
+The main target, to create Rack application without Rails framework.
+#### TODO at Current Time:
+* Custom logger in application config, with logfile support.
+* Test framework support.
+* Sources hot reloading (grape issue).
+* write README ;)
+* Provide smthg like decorator for +API+ class, when can be stored applications settings.
+* Apply DDD pattern.
 
-[![Coverage Status](https://coveralls.io/repos/github/tickmo/server/badge.svg?branch=master)](https://coveralls.io/github/tickmo/server?branch=master)
-[![Build Status](https://travis-ci.org/tickmo/server.svg?branch=master)](https://travis-ci.org/tickmo/server)
+### Application HOWTO:
+* Run `bundle` in project root for gems installation.
+* For run application server, run at console:
+`rackup`, or `RACK_ENV=test rackup` with specific environment, as `test` in example. Default is `development`.
+
+### Docker Support:
+* Install `Docker` and insure, that service booted up.
+* To build `Docker` image, run at project directory:
+
+  ```docker build -t withoutrails .```
+
+  where `withoutrails` is image name, feel free to use other name.
+
+  Then run container with `bash` session:
+
+  ```bash
+  docker run --name withoutrails-app --rm -v $(pwd):/usr/src/ -itP withoutrails
+  ```
+  where:
+  * `--name` container name, feel free to change it.
+  * `--rm` container will be automatically removed after stop.
+  * `-v` link project directory as volume, it means you make changes locally in your favorite editor and they are applying in container.
+  * `-itP` run container with interactive session (bash in that case) and link ports from `withoutrails` image to host.
+* Execute certain bash command at container, `bundle install` for instance:
+
+  ```
+  docker exec -it withoutrails-app bash -c "bundle install"
+  ```

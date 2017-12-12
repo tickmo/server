@@ -1,9 +1,0 @@
-<div class="row">
-  <% screenshots.each do |screen| %>
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a href="<%= screen.screenshot_image.url %>" class="thumbnail">
-        <%= image_tag(screen.screenshot_image.storage_dir_url, class: 'img-responsive img-screen', alt: 'Screen') %>
-      </a>
-    </div>
-  <% end %>
-</div>

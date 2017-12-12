@@ -1,8 +1,0 @@
-<%= render 'layouts/title_with_header', title: @user.name, header: @user.name %>
-
-<div class="row">
-  <div class="span4 center">
-    <%= link_to 'Edit Profile', edit_user_path(@user) %> |
-    <%= link_to 'My Gallery', user_galleries_path(@user) %>
-  </div>
-</div>

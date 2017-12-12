@@ -1,45 +1,18 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.4.1'
 
-gem 'rails', '4.2.5'
-gem 'sass-rails'
-gem 'bcrypt'
-gem 'bootstrap-sass', '3.3.6'
+# Application dependencies.
+gem 'grape', '~> 1.0.0'
+gem 'grape-middleware-logger', '~> 1.9.0'
+gem 'jsonapi-serializers', '~> 1.0.0'
+gem 'rack', '~> 2.0.3'
+gem 'rack-protection', '2.0.0'
+gem 'sequel', '~> 5.0.0'
+gem 'pg', '~> 0.21.0'
 
-# for API's needs.
-gem 'pundit', '~> 0.3.0'
-gem 'active_hash_relation'
-gem 'active_model_serializers', '0.9.2'
-
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
-gem 'uglifier'
-
-# File uploading.
-gem 'rmagick'
-gem 'carrierwave', '0.11.2'
-
-group :development, :test, :production do
-  gem 'pg'
+group :test, :development do
+  gem 'pry', '~> 0.10.4'
+  gem 'thin', '~> 1.7.2'
 end
-
-group :development, :test do
-  gem 'faker'
-  gem 'rubocop'
-  gem 'pry'
-end
-
-group :test do
-  gem 'rspec-rails'
-  gem 'capybara'
-  gem 'factory_girl_rails'
-  gem 'database_cleaner', github: 'bmabey/database_cleaner'
-  gem 'coveralls', require: false
-end
-
-group :production do
-  gem 'unicorn'
-end
-
-gem 'sdoc', require: false
