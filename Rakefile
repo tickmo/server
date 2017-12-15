@@ -8,8 +8,9 @@ namespace :db do
   desc 'Create the database'
   task :create do
     Sequel.connect(DB_ADMIN_CONFIG) do |db|
-      db.execute "CREATE DATABASE #{DB_CONFIG['database']}"
-      puts 'Database created.'
+      db_name = DB_CONFIG['database']
+      db.execute "CREATE DATABASE #{db_name}"
+      puts "Database `#{db_name}` created."
     end
   end
 
@@ -24,8 +25,9 @@ namespace :db do
   desc 'Drop the database'
   task :drop do
     Sequel.connect(DB_ADMIN_CONFIG) do |db|
-      db.execute "DROP DATABASE IF EXISTS #{DB_CONFIG['database']}"
-      puts 'Database deleted.'
+      db_name = DB_CONFIG['database']
+      db.execute "DROP DATABASE IF EXISTS #{db_name}"
+      puts "Database `#{db_name}` deleted."
     end
   end
 
