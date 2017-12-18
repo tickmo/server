@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'sequel'
+require 'pry'
 require_relative './config/db_config'
 
 namespace :db do
@@ -16,10 +17,16 @@ namespace :db do
 
   desc 'Migrate the database'
   task :migrate do
-    Sequel.extension :migration
-    DB = Sequel.connect(DB_CONFIG)
-    Sequel::Migrator.run(DB, './db/migrate/', use_transactions: true)
-    puts 'Database migrated.'
+    migrations = File.join('db', 'migrate', '*.rb')
+
+    if Dir.glob(migrations).empty?
+      puts 'No migration files found.'
+    else
+      Sequel.extension :migration
+      DB = Sequel.connect(DB_CONFIG)
+      Sequel::Migrator.run(DB, './db/migrate/', use_transactions: true)
+      puts 'Database migrated.'
+    end
   end
 
   desc 'Drop the database'

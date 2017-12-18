@@ -1,15 +1,16 @@
 language: ruby
 rvm:
-- 2.2.3
+- 2.4.1
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - cp config/database.yml.example config/database.yml
-  - bundle exec rake db:migrate RAILS_ENV=test
+  - bundle exec rake db:migrate RACK_ENV=test
   - bundle exec rspec
 bundler_args: "--without play"
 notifications:
+  slack: trytickmo:Rvj1LHqCrDkd6aiDOUhb9pLc
   email:
     recipients:
       - antnruban@gmail.com
