@@ -1,34 +1,32 @@
-development:
-  adapter: postgresql
-  host: host
-  username: name
-  password: password
-  encoding: utf8
-  database: tickmo_dev
+# development:
+#   adapter: postgresql
+#   host: host
+#   username: name
+#   password: password
+#   encoding: utf8
+#   database: tickmo_dev
 
-test:
-  adapter: postgresql
-  host: host
-  username: name
-  password: password
-  encoding: utf8
-  database: tickmo_test
+# test:
+#   adapter: postgresql
+#   host: host
+#   username: name
+#   password: password
+#   encoding: utf8
+#   database: tickmo_test
 
 production:
-  adapter: postgresql
-  host: host
-  username: name
-  password: password
-  encoding: utf8
-  database: tickmo_production
+#   adapter: postgresql
+#   host: host
+#   username: name
+#   password: password
+#   encoding: utf8
+#   database: tickmo_production
 
 # There are Travis CI configurations below.
 #
-travis: &travis
+
+test:
   adapter: postgresql
   database: travis_ci_test
   username: travis
   encoding: utf8
-
-test:
-  <<: *travis
