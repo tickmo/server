@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class API < Grape::API
-  insert_after Grape::Middleware::Formatter, Grape::Middleware::Logger
+  insert_after Grape::Middleware::Formatter, Grape::Middleware::Logger, logger: Tickmo::Application.logger
   content_type :json, 'application/json'
   format       :json
 

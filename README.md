@@ -3,14 +3,10 @@
 [![Build Status](https://travis-ci.org/antnruban/withoutrails.svg?branch=master)](https://travis-ci.org/antnruban/withoutrails)
 
 #### Description:
-The main target, to create Rack application without Rails framework.
+TODO: Write Description section.
 #### TODO at Current Time:
-* Custom logger in application config, with logfile support.
-* Test framework support.
 * Sources hot reloading (grape issue).
 * write README ;)
-* Provide smthg like decorator for +API+ class, when can be stored applications settings.
-* Apply DDD pattern.
 
 ### Application HOWTO:
 * Run `bundle` in project root for gems installation.

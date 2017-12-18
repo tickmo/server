@@ -2,7 +2,7 @@
 
 module V1
   class FakeEndpoint < V1::Base
-    namespace :fish_cards do
+    namespace :fake_endpoint do
       get do
         { message: 'Hi!' }
       end

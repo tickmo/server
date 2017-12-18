@@ -1,21 +1,11 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore byebug history.
-/.byebug_history
-
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
 # Ignore db config.
 /config/database.yml
+/config/secrets.yml
 
 # Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
+/log/*.log
 /tmp
 .ruby-version
-/coverage
-uploads
-public/shared
