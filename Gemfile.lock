@@ -56,6 +56,7 @@ GEM
       rack
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
+    rake (12.3.0)
     rspec (3.6.0)
       rspec-core (~> 3.6.0)
       rspec-expectations (~> 3.6.0)
@@ -99,6 +100,7 @@ DEPENDENCIES
   rack (~> 2.0.3)
   rack-protection (= 2.0.0)
   rack-test (~> 0.7.0)
+  rake (~> 12.3.0)
   rspec (~> 3.6.0)
   sequel (~> 5.0.0)
   thin (~> 1.7.2)
