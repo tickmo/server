@@ -2,10 +2,13 @@
 
 class API < Grape::API
   insert_after Grape::Middleware::Formatter, Grape::Middleware::Logger, logger: Tickmo::Application.logger
-  content_type :json, 'application/json'
-  format       :json
+  format          :json
+  content_type    :json, 'application/json'
+  error_formatter :json, V1::APIHelpers::ErrorFormatter
 
-  rescue_from :all { |e| error!(JSONAPI::Serializer.serialize_errors(e.message), 500) }
+  helpers V1::APIHelpers::ExceptionHandler
+
+  rescue_from :all { |exception| handle_exception(exception) }
 
   mount V1::Base
 
@@ -15,4 +18,9 @@ class API < Grape::API
     message = "Route '#{request.path}' wasn't found"
     error!({ errors: [{ status: error_status, title: 'Ruting Error', details: message }] }, error_status)
   end
+
+  add_swagger_documentation(
+    info: { title: 'Tickmo API' },
+    mount_path: '/apidocs'
+  )
 end

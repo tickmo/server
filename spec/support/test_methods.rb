@@ -5,11 +5,11 @@ module TestMethods
   include Rack::Test::Methods
 
   def app
-    API.new
+    TestAPI.new
   end
 
   def json_body
-    JSON.parse(last_response.body)
+    JSON.parse(last_response.body, symbolize_names: true)
   end
 
   def valid_json?(json)

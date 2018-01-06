@@ -9,6 +9,7 @@ gem 'grape-middleware-logger', '~> 1.9.0'
 gem 'jsonapi-serializers', '~> 1.0.0'
 gem 'rake', '~> 12.3.0'
 gem 'rack', '~> 2.0.3'
+gem 'rack-cors', '~> 1.0.2'
 gem 'rack-protection', '2.0.0'
 gem 'sequel', '~> 5.0.0'
 gem 'pg', '~> 0.21.0'
@@ -24,4 +25,5 @@ end
 group :test, :development do
   gem 'pry', '~> 0.10.4'
   gem 'thin', '~> 1.7.2'
+  gem 'grape-swagger', '~> 0.27.3'
 end
