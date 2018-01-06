@@ -6,10 +6,19 @@ require 'active_support/dependencies'
 
 module Tickmo
   class Application
-    def self.logger
-      out = "./log/#{ENV['RACK_ENV']}.log"
-      out = out.dup.prepend('| tee ') if ENV['RACK_ENV'] != 'test'
-      Logger.new(out, level: :info) # TODO: Provide different levels depended on environments.
+    OUT = "./log/#{ENV['RACK_ENV']}.log"
+
+    class << self
+      def logger
+        @logger ||= define_logger
+      end
+
+      private
+
+      def define_logger
+        out = OUT.dup.prepend('| tee ') if ENV['RACK_ENV'] != 'test'
+        Logger.new(out || OUT, level: :info) # TODO: Provide different levels depended on environments.
+      end
     end
   end
 end
