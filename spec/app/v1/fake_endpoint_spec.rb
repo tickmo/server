@@ -7,7 +7,7 @@ describe 'V1::FakeEndpoint' do
   let(:namespace) { '/v1/fake_endpoint' }
 
   context :index do
-    let(:expected_body) { { 'message' => 'Hi!' } }
+    let(:expected_body) { { message: 'Hi!' } }
 
     before { get namespace }
 

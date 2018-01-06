@@ -15,6 +15,14 @@ module V1
       post :create do
         { message: params['message'], description: params['description'] }
       end
+
+      delete :destroy do
+        { message: 'successfully destroyed' }
+      end
+
+      patch :update do
+        { message: 'successfully updated' }
+      end
     end
   end
 end
